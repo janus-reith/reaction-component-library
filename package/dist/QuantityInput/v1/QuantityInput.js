@@ -29,7 +29,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _styles = require("@material-ui/styles");
+var _withStyles = _interopRequireDefault(require("@material-ui/core/styles/withStyles"));
 
 var _ButtonBase = _interopRequireDefault(require("@material-ui/core/ButtonBase"));
 
@@ -217,6 +217,6 @@ QuantityInput.defaultProps = {
   onChange: function onChange() {}
 };
 
-var _default = (0, _styles.withStyles)(styles)(QuantityInput);
+var _default = (0, _withStyles.default)(styles)(QuantityInput);
 
 exports.default = _default;
