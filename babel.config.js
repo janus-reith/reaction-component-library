@@ -10,11 +10,13 @@ module.exports = function (api) {
           "@babel/env",
           {
             // https://babeljs.io/docs/en/babel-preset-env#targets
+            "corejs": 3,
             targets: {
               node: "current",
               browsers: [
-                "last 2 versions",
-                "ie 11"
+                "> 1% in DE",
+                "ie 11",
+                "iOS >= 7"
               ]
             }
           }
@@ -22,7 +24,7 @@ module.exports = function (api) {
         "@babel/preset-react"
       ],
       plugins: [
-        "babel-plugin-styled-components",
+        ["styled-components", { "ssr": true }],
         ["@babel/plugin-proposal-decorators", { legacy: true }],
         ["@babel/plugin-proposal-class-properties", { loose: true }],
         "@babel/plugin-syntax-dynamic-import"
@@ -39,11 +41,13 @@ module.exports = function (api) {
       {
         modules: esmodules ? false : "auto",
         // https://babeljs.io/docs/en/babel-preset-env#targets
+        "corejs": 3,
         targets: {
           node: "8",
           browsers: [
-            "last 2 versions",
-            "ie 11"
+            "> 1% in DE",
+            "ie 11",
+            "iOS >= 7"
           ]
           // Note: If we eventually drop IE11 supports, it should be safe
           // to go back to passing `esmodules: true` here. But for now,
