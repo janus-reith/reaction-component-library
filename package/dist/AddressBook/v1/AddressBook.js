@@ -179,7 +179,8 @@ function (_Component) {
           _this$props$component = _this$props.components,
           AccordionFormList = _this$props$component.AccordionFormList,
           AddressForm = _this$props$component.AddressForm,
-          isSaving = _this$props.isSaving;
+          isSaving = _this$props.isSaving,
+          labels = _this$props.labels;
       var items = addressBook.map(function (_ref4) {
         var _id = _ref4._id,
             address = (0, _objectWithoutProperties2.default)(_ref4, ["_id"]);
@@ -192,13 +193,15 @@ function (_Component) {
             onSubmit: function onSubmit(value) {
               _this2.handleEditAddress(value, _id);
             },
-            value: address
+            value: address,
+            labels: labels
           },
           label: address.fullName
         };
       });
       var itemAddFormProps = {
         isSaving: isSaving,
+        labels: labels,
         onSubmit: this.handleAddAddress
       };
       return _react.default.createElement(AccordionFormList, {

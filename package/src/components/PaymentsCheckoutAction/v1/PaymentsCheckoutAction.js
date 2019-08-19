@@ -114,13 +114,22 @@ class PaymentsCheckoutAction extends Component {
     /**
      * Checkout process step number
      */
-    stepNumber: PropTypes.number.isRequired
+    stepNumber: PropTypes.number.isRequired,
+
+    labels: PropTypes.shape({
+      billingAddressTitle: PropTypes.string,
+      otherAddressLabel: PropTypes.string
+    })
   };
 
   static defaultProps = {
     onReadyForSaveChange() {},
     onReset() {},
-    onSubmit() {}
+    onSubmit() {},
+    labels: {
+      billingAddressTitle: "Billing Address",
+      otherAddressLabel: "Use a different address"
+    }
   };
 
   constructor(props) {
@@ -212,12 +221,14 @@ class PaymentsCheckoutAction extends Component {
   };
 
   renderBillingAddressForm() {
-    const { addresses, components: { AddressChoice }, isSaving } = this.props;
+    const { addresses, components: { AddressChoice }, isSaving, labels } = this.props;
+
+    const { billingAddressTitle, otherAddressLabel } = labels;
 
     return (
       <Fragment>
-        <Title>Billing Address</Title>
-        <AddressChoice addresses={addresses} isReadOnly={isSaving} onChange={this.handleAddressChange} />
+        <Title>{billingAddressTitle}</Title>
+        <AddressChoice addresses={addresses} isReadOnly={isSaving} onChange={this.handleAddressChange} otherAddressLabel={otherAddressLabel} labels={labels} />
       </Fragment>
     );
   }

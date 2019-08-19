@@ -99,13 +99,15 @@ function (_Component) {
       var _this$props2 = this.props,
           className = _this$props2.className,
           AddressForm = _this$props2.components.AddressForm,
-          isReadOnly = _this$props2.isReadOnly;
+          isReadOnly = _this$props2.isReadOnly,
+          labels = _this$props2.labels;
       var selectedOption = this.state.selectedOption;
       return React.createElement("div", {
         className: className
       }, this.renderSelectList(), selectedOption === "OTHER" && React.createElement(AddressForm, {
         isReadOnly: isReadOnly,
-        onChange: this.handleChangeAddress
+        onChange: this.handleChangeAddress,
+        labels: labels
       }));
     }
   }]);

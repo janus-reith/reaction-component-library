@@ -135,7 +135,8 @@ function (_Component) {
           onChange = _this$props2.onChange,
           shouldShowAddressNameField = _this$props2.shouldShowAddressNameField,
           shouldShowIsCommercialField = _this$props2.shouldShowIsCommercialField,
-          validator = _this$props2.validator;
+          validator = _this$props2.validator,
+          labels = _this$props2.labels;
       var addressNameInputId = "addressName_".concat(this.uniqueInstanceIdentifier);
       var countryInputId = "country_".concat(this.uniqueInstanceIdentifier);
       var fullNameInputId = "fullName_".concat(this.uniqueInstanceIdentifier);
@@ -160,7 +161,7 @@ function (_Component) {
         value: value
       }, React.createElement(Grid, null, shouldShowAddressNameField && React.createElement(ColFull, null, React.createElement(Field, {
         name: "addressName",
-        label: "Address Name",
+        label: labels.addressName,
         labelFor: addressNameInputId,
         isOptional: true
       }, React.createElement(TextInput, {
@@ -171,7 +172,7 @@ function (_Component) {
         isReadOnly: isSaving || isReadOnly
       }))), React.createElement(ColFull, null, React.createElement(Field, {
         name: "country",
-        label: "Country",
+        label: labels.country,
         labelFor: countryInputId,
         isRequired: true
       }, this.countryOptions && this.countryOptions.length > 1 ? React.createElement(Select, {
@@ -181,69 +182,69 @@ function (_Component) {
         name: "country",
         onChange: this.handleCountryChange,
         options: this.countryOptions,
-        placeholder: "Country",
+        placeholder: labels.country,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }) : React.createElement(TextInput, {
         id: countryInputId,
         name: "country",
-        placeholder: "Country",
+        placeholder: labels.country,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }), React.createElement(ErrorsBlock, {
         names: ["country"]
       }))), React.createElement(ColFull, null, React.createElement(Field, {
         name: "fullName",
-        label: "Name",
+        label: labels.fullName,
         labelFor: fullNameInputId,
         isRequired: true
       }, React.createElement(TextInput, {
         id: fullNameInputId,
         name: "fullName",
-        placeholder: "Name",
+        placeholder: labels.fullName,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }), React.createElement(ErrorsBlock, {
         names: ["fullName"]
       }))), React.createElement(ColFull, null, React.createElement(Field, {
         name: "address1",
-        label: "Address",
+        label: labels.address1,
         labelFor: address1InputId,
         isRequired: true
       }, React.createElement(TextInput, {
         id: address1InputId,
         name: "address1",
-        placeholder: "Address",
+        placeholder: labels.address1,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }), React.createElement(ErrorsBlock, {
         names: ["address1"]
       }))), React.createElement(ColFull, null, React.createElement(Field, {
         name: "address2",
-        label: "Address Line 2",
+        label: labels.address2,
         labelFor: address2InputId,
         isOptional: true
       }, React.createElement(TextInput, {
         id: address2InputId,
         name: "address2",
-        placeholder: "Address Line 2 (Optional)",
+        placeholder: labels.address2,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }))), React.createElement(ColFull, null, React.createElement(Field, {
         name: "city",
-        label: "City",
+        label: labels.city,
         labelFor: cityInputId
       }, React.createElement(TextInput, {
         id: cityInputId,
         name: "city",
-        placeholder: "City",
+        placeholder: labels.city,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }), React.createElement(ErrorsBlock, {
         names: ["city"]
       }))), React.createElement(ColHalf, null, React.createElement(Field, {
         name: "region",
-        label: "Region",
+        label: labels.region,
         labelFor: regionInputId,
         isRequired: true
       }, React.createElement(RegionInput, {
@@ -252,31 +253,31 @@ function (_Component) {
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly,
         name: "region",
-        placeholder: "Region"
+        placeholder: labels.region
       }), React.createElement(ErrorsBlock, {
         names: ["region"]
       }))), React.createElement(ColHalf, null, React.createElement(Field, {
         name: "postal",
-        label: "Postal Code",
+        label: labels.postal,
         labelFor: postalInputId,
         isRequired: true
       }, React.createElement(TextInput, {
         id: postalInputId,
         name: "postal",
-        placeholder: "Postal Code",
+        placeholder: labels.postal,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }), React.createElement(ErrorsBlock, {
         names: ["postal"]
       }))), React.createElement(ColFull, null, React.createElement(Field, {
         name: "phone",
-        label: "Phone",
+        label: labels.phone,
         labelFor: phoneInputId,
         isRequired: true
       }, React.createElement(PhoneNumberInput, {
         id: phoneInputId,
         name: "phone",
-        placeholder: "Phone",
+        placeholder: labels.phone,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       }), React.createElement(ErrorsBlock, {
@@ -287,7 +288,7 @@ function (_Component) {
       }, React.createElement(Checkbox, {
         id: isCommercialInputId,
         name: "isCommercial",
-        label: "This is a commercial address.",
+        label: labels.isCommercial,
         isOnDarkBackground: isOnDarkBackground,
         isReadOnly: isSaving || isReadOnly
       })))));
@@ -477,7 +478,19 @@ AddressForm.propTypes = {
   /**
    * Address object to be edited
    */
-  value: CustomPropTypes.address
+  value: CustomPropTypes.address,
+  labels: PropTypes.shape({
+    addressName: PropTypes.string,
+    address1: PropTypes.string,
+    address2: PropTypes.string,
+    country: PropTypes.string,
+    city: PropTypes.string,
+    fullName: PropTypes.string,
+    postal: PropTypes.string,
+    region: PropTypes.string,
+    phone: PropTypes.string,
+    isCommercial: PropTypes.string
+  })
 };
 AddressForm.defaultProps = {
   addressNamePlaceholder: "Address Name",
@@ -504,6 +517,18 @@ AddressForm.defaultProps = {
     region: "",
     phone: "",
     isCommercial: false
+  },
+  labels: {
+    addressName: "Address Name",
+    address1: "Address",
+    address2: "Address Line 2",
+    country: "Country",
+    city: "City",
+    fullName: "Name",
+    postal: "Postal Code",
+    region: "Region",
+    phone: "Phone",
+    isCommercial: "This is a commercial address."
   }
 };
 export default withComponents(AddressForm);

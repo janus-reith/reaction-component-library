@@ -247,11 +247,16 @@ function (_Component) {
       var _this$props3 = this.props,
           addresses = _this$props3.addresses,
           AddressChoice = _this$props3.components.AddressChoice,
-          isSaving = _this$props3.isSaving;
-      return _react.default.createElement(_react.Fragment, null, _react.default.createElement(Title, null, "Billing Address"), _react.default.createElement(AddressChoice, {
+          isSaving = _this$props3.isSaving,
+          labels = _this$props3.labels;
+      var billingAddressTitle = labels.billingAddressTitle,
+          otherAddressLabel = labels.otherAddressLabel;
+      return _react.default.createElement(_react.Fragment, null, _react.default.createElement(Title, null, billingAddressTitle), _react.default.createElement(AddressChoice, {
         addresses: addresses,
         isReadOnly: isSaving,
-        onChange: this.handleAddressChange
+        onChange: this.handleAddressChange,
+        otherAddressLabel: otherAddressLabel,
+        labels: labels
       }));
     }
   }, {
@@ -431,12 +436,20 @@ PaymentsCheckoutAction.propTypes = {
   /**
    * Checkout process step number
    */
-  stepNumber: _propTypes.default.number.isRequired
+  stepNumber: _propTypes.default.number.isRequired,
+  labels: _propTypes.default.shape({
+    billingAddressTitle: _propTypes.default.string,
+    otherAddressLabel: _propTypes.default.string
+  })
 };
 PaymentsCheckoutAction.defaultProps = {
   onReadyForSaveChange: function onReadyForSaveChange() {},
   onReset: function onReset() {},
-  onSubmit: function onSubmit() {}
+  onSubmit: function onSubmit() {},
+  labels: {
+    billingAddressTitle: "Billing Address",
+    otherAddressLabel: "Use a different address"
+  }
 };
 
 var _default = (0, _componentsContext.withComponents)(PaymentsCheckoutAction);

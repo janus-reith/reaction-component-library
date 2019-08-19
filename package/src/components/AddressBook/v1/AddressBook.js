@@ -133,7 +133,7 @@ class AddressBook extends Component {
   // Render Methods
   //
   renderAccordionFormList() {
-    const { account: { addressBook }, components: { AccordionFormList, AddressForm }, isSaving } = this.props;
+    const { account: { addressBook }, components: { AccordionFormList, AddressForm }, isSaving, labels } = this.props;
 
     const items = addressBook.map(({ _id, ...address }) => ({
       id: _id,
@@ -144,13 +144,15 @@ class AddressBook extends Component {
         onSubmit: (value) => {
           this.handleEditAddress(value, _id);
         },
-        value: address
+        value: address,
+        labels
       },
       label: address.fullName
     }));
 
     const itemAddFormProps = {
       isSaving,
+      labels,
       onSubmit: this.handleAddAddress
     };
 

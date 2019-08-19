@@ -126,13 +126,13 @@ class AddressChoice extends Component {
   }
 
   render() {
-    const { className, components: { AddressForm }, isReadOnly } = this.props;
+    const { className, components: { AddressForm }, isReadOnly, labels } = this.props;
     const { selectedOption } = this.state;
 
     return (
       <div className={className}>
         {this.renderSelectList()}
-        {selectedOption === "OTHER" && <AddressForm isReadOnly={isReadOnly} onChange={this.handleChangeAddress} />}
+        {selectedOption === "OTHER" && <AddressForm isReadOnly={isReadOnly} onChange={this.handleChangeAddress} labels={labels} />}
       </div>
     );
   }
